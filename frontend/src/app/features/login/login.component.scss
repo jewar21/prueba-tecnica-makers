@@ -1,0 +1,46 @@
+:host {
+  display: block;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at 85% 10%, rgba(107, 69, 188, 0.08), transparent 40rem),
+    radial-gradient(circle at 15% 90%, rgba(100, 196, 236, 0.06), transparent 30rem),
+    var(--mk-bg-light);
+}
+
+.login-card {
+  width: min(100%, 28rem);
+  background: var(--mk-white);
+  border-radius: var(--mk-radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--mk-shadow-lg);
+}
+
+.brand {
+  width: 3.2rem;
+  height: 3.2rem;
+  display: grid;
+  place-items: center;
+  border-radius: var(--mk-radius-sm);
+  background: linear-gradient(105deg, var(--mk-purple-800) 0%, var(--mk-purple-600) 100%);
+  color: var(--mk-white);
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.03em;
+}
+
+form {
+  display: grid;
+  gap: 1.2rem;
+}
+
+@media (max-width: 32rem) {
+  .login-card {
+    padding: 1.6rem;
+  }
+}
