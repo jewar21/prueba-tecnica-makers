@@ -102,3 +102,13 @@ reviewedAt
 rejectionReason
 
 Sin embargo esto no lo estan solicitando en el documento.
+
+4. Reglas de negocio
+- RN-01 — Creación de préstamo
+- RN-02 — Monto válido
+- RN-03 — Plazo válido
+- RN-04 — Propiedad de los préstamos
+- RN-05 — Aprobación y rechazo
+- RN-06 — Transición válida
+- RN-07 — Operación transaccional
+- RN-08 — Caché
