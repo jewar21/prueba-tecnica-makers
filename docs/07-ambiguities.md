@@ -4,7 +4,7 @@ A lo largo del análisis del documento se identificaron varios puntos no especif
 
 | Ambigüedad                        | Decisión MVP                          |
 |-----------------------------------|---------------------------------------|
-| No define registro público        | Precargar usuario y admin con seed data |
+| No define registro público        | Seed opcional de USER y ADMIN mediante variables de entorno; sin credenciales versionadas |
 | No define unidad del plazo        | Usar meses como unidad                |
 | No define monto mínimo/máximo     | Validar únicamente `amount > 0`       |
 | No define moneda                  | Usar COP (peso colombiano)            |
