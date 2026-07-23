@@ -99,3 +99,9 @@ La documentación del proyecto está organizada en la carpeta [`docs/`](docs/):
 | [09-api-endpoints.md](docs/09-api-endpoints.md) | Endpoints preliminares de la API |
 | [10-user-stories.md](docs/10-user-stories.md) | Historias de usuario con criterios de aceptación |
 | [11-sdlc-plan.md](docs/11-sdlc-plan.md) | Plan SDLC (Planning a Maintenance) |
+
+## Preguntas resueltas
+
+Las preguntas de la prueba técnica (las que alcancé a ver) están resueltas en este enlace:
+
+[Prueba Técnica — Resolución de preguntas](https://star-saver-473.notion.site/Prueba-Tecnica-resolucion-de-preguntas-3a6a0cdf497e80d089a7f78d22c30663?source=copy_link)
