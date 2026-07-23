@@ -10,8 +10,8 @@ export const routes: Routes = [
     path: 'loans',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./features/user-loans/user-loans-placeholder.component').then(
-        (module) => module.UserLoansPlaceholderComponent,
+      import('./features/user-loans/user-loans.component').then(
+        (module) => module.UserLoansComponent,
       ),
   },
   {

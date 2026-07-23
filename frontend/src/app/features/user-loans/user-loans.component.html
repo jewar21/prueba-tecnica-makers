@@ -1,0 +1,122 @@
+<header class="app-header">
+  <div class="header-inner">
+    <div class="brand" aria-hidden="true">MB</div>
+    <span class="brand-name">Makers Bank</span>
+    <nav class="header-nav">
+      <button class="mk-btn mk-btn-ghost" (click)="logout()">Cerrar sesión</button>
+    </nav>
+  </div>
+</header>
+
+<main class="loans-page">
+  <section class="loans-header">
+    <div>
+      <p class="mk-eyebrow">Área de usuario</p>
+      <h1 class="mk-h1">Mis préstamos</h1>
+    </div>
+    <button class="mk-btn mk-btn-primary" (click)="toggleForm()">
+      @if (showForm()) {
+        Cancelar
+      } @else {
+        + Solicitar préstamo
+      }
+    </button>
+  </section>
+
+  @if (showForm()) {
+    <div class="mk-card form-card">
+      <h2 class="mk-h2" style="margin-bottom:1.2rem;">Nueva solicitud</h2>
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="mk-field">
+          <label for="amount">Monto</label>
+          <input
+            class="mk-input"
+            id="amount"
+            type="number"
+            formControlName="amount"
+            placeholder="Ej: 5000000"
+          />
+          @if (form.controls.amount.touched && form.controls.amount.hasError('required')) {
+            <small class="mk-field-error">El monto es obligatorio.</small>
+          } @else if (form.controls.amount.touched && form.controls.amount.hasError('min')) {
+            <small class="mk-field-error">El monto debe ser mayor que cero.</small>
+          }
+        </div>
+
+        <div class="mk-field">
+          <label for="termMonths">Plazo (meses)</label>
+          <input
+            class="mk-input"
+            id="termMonths"
+            type="number"
+            formControlName="termMonths"
+            placeholder="Ej: 24"
+          />
+          @if (form.controls.termMonths.touched && form.controls.termMonths.hasError('required')) {
+            <small class="mk-field-error">El plazo es obligatorio.</small>
+          } @else if (form.controls.termMonths.touched && (form.controls.termMonths.hasError('min') || form.controls.termMonths.hasError('max'))) {
+            <small class="mk-field-error">El plazo debe estar entre 1 y 360 meses.</small>
+          }
+        </div>
+
+        @if (createError()) {
+          <p class="mk-alert mk-alert-error" role="alert">{{ createError() }}</p>
+        }
+
+        <button class="mk-btn mk-btn-primary" type="submit" [disabled]="isSubmitting()" style="width:100%;">
+          @if (isSubmitting()) {
+            <span class="mk-spinner"></span>
+            Enviando…
+          } @else {
+            Enviar solicitud
+          }
+        </button>
+      </form>
+    </div>
+  }
+
+  <div class="mk-card loans-list-card">
+    <h2 class="mk-h2" style="margin-bottom:1.2rem;">Historial</h2>
+
+    @if (isLoadingLoans()) {
+      <div class="loading-state">
+        <span class="mk-spinner" style="border-color:var(--mk-purple-300);border-top-color:var(--mk-purple-600);"></span>
+        <p>Cargando solicitudes…</p>
+      </div>
+    } @else if (loans().length === 0) {
+      <div class="empty-state">
+        <p class="mk-subtitle">Aún no tienes solicitudes de préstamo.</p>
+        <button class="mk-btn mk-btn-primary" (click)="showForm.set(true)">Solicitar primer préstamo</button>
+      </div>
+    } @else {
+      <div class="table-wrapper">
+        <table class="mk-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Monto</th>
+              <th>Plazo</th>
+              <th>Estado</th>
+              <th>Solicitado</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (loan of loans(); track loan.id) {
+              <tr>
+                <td>{{ loan.id }}</td>
+                <td class="amount-cell">{{ formatAmount(loan.amount) }}</td>
+                <td>{{ loan.termMonths }} meses</td>
+                <td>
+                  <span class="mk-badge mk-badge-{{ loan.status.toLowerCase() }}">
+                    {{ statusLabel(loan.status) }}
+                  </span>
+                </td>
+                <td>{{ loan.createdAt | date:'short' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+</main>
