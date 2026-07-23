@@ -51,6 +51,8 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/loans").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/api/loans/my").hasRole("USER")
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
@@ -106,8 +108,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    JwtTokenAdapter jwtTokenAdapter(JwtEncoder encoder, JwtProperties properties) {
-        return new JwtTokenAdapter(encoder, properties.expiration(), Clock.systemUTC());
+    JwtTokenAdapter jwtTokenAdapter(JwtEncoder encoder, JwtProperties properties, Clock clock) {
+        return new JwtTokenAdapter(encoder, properties.expiration(), clock);
     }
 
     @Bean
