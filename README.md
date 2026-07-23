@@ -30,7 +30,7 @@ Usuario consulta el resultado
 
 ## Estado — Épica 1
 
-Implementado:
+✅ Implementado:
 
 - Login REST `POST /api/auth/login` con validación y errores 400/401.
 - BCrypt, JWT HS256 configurable y sesiones stateless.
@@ -40,6 +40,16 @@ Implementado:
 - Login Angular con Reactive Forms, servicio de estado, interceptor JWT y guards por rol.
 
 Las pantallas `/loans` y `/admin/loans` son placeholders protegidos. La lógica de préstamos pertenece a las épicas 2 y 3.
+
+## Estado — Épica 2
+
+✅ Implementado:
+
+- `POST /api/loans` — Crear solicitud con validación de monto y plazo (400 en errores). Solo USER.
+- `GET /api/loans/my` — Consultar préstamos del usuario autenticado. Solo USER.
+- Validaciones: monto > 0, plazo entre 1 y 360 meses.
+- Pruebas unitarias y de integración del controlador.
+- Frontend con formulario reactivo de solicitud, listado de préstamos con estados y diseño Makers Bank.
 
 ## Ejecución local
 
