@@ -42,3 +42,18 @@ La documentación del proyecto está organizada en la carpeta [`docs/`](docs/):
 | [06-technical-decisions.md](docs/06-technical-decisions.md) | Decisiones técnicas y justificaciones |
 
 
+Algunas ambiguedades que he detectado en el documento:
+No define registro público	
+No define unidad del plazo	Utilizar meses
+No define monto mínimo/máximo	Validar únicamente mayor que cero
+No define moneda	Usar COP en el MVP
+No define motivo de rechazo	Campo opcional
+No define si se puede editar un préstamo	No permitir modificar después de enviarlo
+No define eliminación	Evitar eliminación física
+No define expiración JWT	Configurable por variable
+No define refresh token	No implementarlo en el MVP
+No define paginación	
+No define auditoría	Registrar reviewedAt y reviewedBy si alcanzo
+Pide JPA y menciona WebFlux	Usar MVC + JPA y justificar
+Sugiere servicios o NgRx	Usar servicios; NgRx sería excesivo
+Recomienda Ehcache u otra caché	Usar Caffeine o Ehcache según rapidez (Ehcache podria complicarme)
