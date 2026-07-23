@@ -140,3 +140,129 @@ Sin embargo esto no lo estan solicitando en el documento.
 - RN-09 — Idempotencia de operaciones
   Las operaciones que modifiquen el estado de un préstamo deberán ser idempotentes.
   El reintento de una solicitud de aprobación o rechazo no deberá generar efectos adicionales, registros duplicados ni transiciones inconsistentes.
+
+5. Casos de uso
+- CU-01 — Autenticar usuario
+Actor: Usuario o administrador.
+Entrada:
+
+Correo.
+Contraseña.
+
+Salida:
+
+JWT.
+Rol.
+Datos básicos del usuario.
+
+Errores:
+
+Credenciales inválidas.
+Usuario deshabilitado.
+Formato incorrecto.
+
+- CU-02 — Registrar usuario
+Para este CRUD haremos Precargar:
+Un usuario.
+Un administrador.
+Y dejar el CRUD de usuarios disponible solo para administradores. (Hay una alternativa mas completa para ello que seria hacer un enpoint publico de registro solo para USER, pero no creo que me alcance el tiempo).
+Nunca permitir que el cliente se registre a sí mismo como ADMIN.
+
+- CU-03 — Solicitar préstamo
+Actor: Usuario autenticado.
+
+Entrada:
+
+Monto.
+Plazo.
+
+Proceso:
+
+Validar usuario.
+Validar monto.
+Validar plazo.
+Crear préstamo.
+Asignar estado PENDING.
+Persistir.
+Devolver resultado.
+
+Salida esperada:
+
+201 Created
+
+- CU-04 — Consultar mis préstamos
+Actor: Usuario autenticado.
+
+Proceso:
+
+Obtener identidad desde JWT.
+Consultar préstamos del usuario.
+Utilizar caché si corresponde.
+Devolver lista.
+
+Salida:
+
+200 OK
+
+- CU-05 — Consultar solicitudes administrativas
+Actor: Administrador.
+
+Puede consultar:
+
+Todas las solicitudes.
+Solicitudes pendientes.
+Solicitudes por estado.
+
+Para el MVP, el filtro más importante es:
+
+status=PENDING
+
+- CU-06 — Aprobar préstamo
+Actor: Administrador.
+
+Precondición:
+
+status = PENDING
+
+Proceso:
+
+Buscar préstamo.
+Validar estado.
+Cambiar a APPROVED.
+Registrar fecha de revisión.
+Persistir transaccionalmente.
+Invalidar caché.
+Devolver resultado.
+
+- CU-07 — Rechazar préstamo
+Es equivalente a aprobar, pero cambia el estado a:
+
+REJECTED
+
+El documento no exige motivo de rechazo.
+
+- CU-08 — CRUD de usuarios
+Debe existir porque el requisito lo solicita, pero no es el centro del ejemplo visual.
+
+Operaciones posibles:
+
+Crear usuario.
+Consultar usuarios.
+Consultar usuario por ID.
+Actualizar usuario.
+Deshabilitar usuario.
+
+Para una aplicación financiera sería preferible deshabilitar antes que eliminar físicamente, aunque el documento no lo exige.
+
+- CU-09 — CRUD de préstamos
+El requisito menciona CRUD completo. Sin embargo, editar o eliminar préstamos puede entrar en conflicto con el flujo bancario.
+
+Una interpretación responsable sería:
+
+Crear solicitud.
+Consultar solicitud.
+Consultar listado.
+Actualizar únicamente mediante transición administrativa.
+Eliminar solo si está pendiente y pertenece al usuario, o no exponer eliminación pública.
+
+Esta es una ambigüedad importante del documento.
