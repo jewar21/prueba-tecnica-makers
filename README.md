@@ -284,3 +284,28 @@ Esta es una ambigüedad importante del documento.
 - RF-14 El frontend debe proteger rutas mediante Guards
 - RF-15 El frontend debe conservar el estado de autenticación
 - RF-16 La API debe devolver errores HTTP claros
+
+7. Requisitos no funcionales
+- RNF-01 — Seguridad
+Spring Security.
+JWT.
+Contraseñas cifradas.
+Autorización por roles.
+Protección de endpoints.
+Guards en Angular.
+Validación de entradas.
+No exponer datos sensibles.
+- RNF-02 — Arquitectura
+hexagonal
+- RNF-03 — Rendimiento
+Debe existir caché para reducir consultas repetitivas de estado.
+- RNF-04 — Consistencia
+Las decisiones administrativas deben ser transaccionales.
+- RNF-05 — Calidad
+Debe incluir pruebas unitarias de operaciones críticas con JUnit 5 y Spring Boot Test. (Adicional a ello quiero incluir un poco de SonarQube).
+- RNF-06 — Persistencia
+PostgreSQL
+- RNF-07 — Usabilidad
+El frontend debe ser amigable y permitir completar el flujo sin conocimientos técnicos.
+- RNF-08 — Documentación
+Explicare y justificare en medida mis decisiones tecnicas.
