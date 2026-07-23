@@ -57,3 +57,24 @@ No define auditoría	Registrar reviewedAt y reviewedBy si alcanzo
 Pide JPA y menciona WebFlux	Usar MVC + JPA y justificar
 Sugiere servicios o NgRx	Usar servicios; NgRx sería excesivo
 Recomienda Ehcache u otra caché	Usar Caffeine o Ehcache según rapidez (Ehcache podria complicarme)
+
+Alcance MVP
+Debe estar incluido
+Login.
+JWT.
+Roles.
+Crear préstamo.
+Consultar préstamos del usuario.
+Consultar solicitudes como administrador.
+Aprobar.
+Rechazar.
+Validaciones.
+Manejo global de errores.
+Persistencia.
+Caché.
+Transacción.
+Pruebas críticas.
+Angular con Reactive Forms.
+Guards.
+README.
+Repositorio público.
