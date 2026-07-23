@@ -1,6 +1,6 @@
 # prueba-tecnica-makers
 
-Tenemos un flujo principal del reto:
+1. Tenemos un flujo principal del reto:
 Usuario inicia sesión
         ↓
 Solicita préstamo
@@ -13,7 +13,7 @@ Aprueba o rechaza
         ↓
 Usuario consulta el resultado
 
-Que actores tiene este spftware?
+2. Que actores tiene este spftware?
 Usuario
 
 Puede:
@@ -53,3 +53,52 @@ Mantener consistencia en cambios de estado.
 Almacenar en caché consultas repetitivas.
 Devolver errores HTTP claros.
 Registrar estados correctamente.
+
+3. Entidades del dominio
+
+Usuario
+
+Información mínima inferida:
+
+User
+- id
+- email
+- password
+- role
+- enabled
+- createdAt
+
+Reglas mínimas
+El correo debe ser obligatorio.
+El correo debe ser válido.
+El correo debe ser único.
+La contraseña no debe almacenarse en texto plano.
+El rol debe ser USER o ADMIN.
+Un usuario solo consulta sus préstamos.
+
+Préstamo
+
+Información mínima:
+
+Loan
+- id
+- userId
+- amount
+- term
+- status
+- createdAt
+- updatedAt
+
+El documento exige monto y plazo al solicitar el préstamo.
+
+Estado:
+PENDING
+APPROVED
+REJECTED
+
+Podriamos agregar como algo adicional:
+reviewedBy
+reviewedAt
+rejectionReason
+
+Sin embargo esto no lo estan solicitando en el documento.
