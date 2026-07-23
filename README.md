@@ -44,3 +44,4 @@ La documentación del proyecto está organizada en la carpeta [`docs/`](docs/):
 | [08-mvp-scope.md](docs/08-mvp-scope.md) | Alcance del MVP con checklist |
 | [09-api-endpoints.md](docs/09-api-endpoints.md) | Endpoints preliminares de la API |
 | [10-user-stories.md](docs/10-user-stories.md) | Historias de usuario con criterios de aceptación |
+| [11-sdlc-plan.md](docs/11-sdlc-plan.md) | Plan SDLC (Planning a Maintenance) |
