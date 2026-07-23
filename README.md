@@ -105,10 +105,38 @@ Sin embargo esto no lo estan solicitando en el documento.
 
 4. Reglas de negocio
 - RN-01 — Creación de préstamo
+  Una solicitud nueva debe quedar en estado: PENDING
+  Esto es una inferencia funcional debido a lo que observo en la interfaz de ejemplo.
 - RN-02 — Monto válido
+  El préstamo debe tener un monto válido.
+  El documento no define:
+  Monto mínimo.
+  Monto máximo.
+  Moneda.
+  Número de decimales permitido.
+  
+  Para el MVP deberá declararse una regla propia, por ejemplo: amount > 0
 - RN-03 — Plazo válido
+  El plazo es obligatorio, pero no se especifica su unidad.
+  lo voy a representar como termMonths y seria de 1 a 360meses
 - RN-04 — Propiedad de los préstamos
+  El usuario solo debe consultar préstamos asociados con su identidad autenticada.
+  No debería confiarse en un userId enviado libremente desde el frontend.
+  El backend debería obtener al usuario desde el token JWT.
 - RN-05 — Aprobación y rechazo
+  Solo un administrador puede aprobar o rechazar préstamos. El requisito aparece tanto para Spring Security como para los Guards del frontend.
 - RN-06 — Transición válida
+  Solo un préstamo en estado PENDING debería pasar a:
+  APPROVED.
+  REJECTED.
+  No debería permitirse:
+  APPROVED → REJECTED
+  REJECTED → APPROVED
 - RN-07 — Operación transaccional
-- RN-08 — Caché
+  La aprobación o rechazo debe ejecutarse dentro de una transacción para garantizar consistencia.
+- RN-08 — Caché y deduplicación de consultas
+  Las consultas repetitivas sobre el estado de los préstamos deberán utilizar mecanismos de caché para reducir la latencia y la carga sobre los sistemas de origen.
+  Cuando varias solicitudes idénticas se ejecuten simultáneamente, el sistema podrá aplicar deduplicación de solicitudes para evitar procesar múltiples veces la misma consulta.
+- RN-09 — Idempotencia de operaciones
+  Las operaciones que modifiquen el estado de un préstamo deberán ser idempotentes.
+  El reintento de una solicitud de aprobación o rechazo no deberá generar efectos adicionales, registros duplicados ni transiciones inconsistentes.
